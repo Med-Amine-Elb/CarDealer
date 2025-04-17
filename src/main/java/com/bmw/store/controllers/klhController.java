@@ -66,22 +66,7 @@ public class klhController {
 
 
     // ✅ 2. Get filtered products (with filters, pagination, and sorting)
-    @GetMapping("/filter")
-    public ResponseEntity<Page<Product>> getFilteredProducts(
-            ProductFilterDTO filterDTO,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "DESC") String sortOrder
-    ) {
-        Sort sort = sortOrder.equalsIgnoreCase("DESC") ?
-                Sort.by(Sort.Direction.DESC, sortBy) :
-                Sort.by(Sort.Direction.ASC, sortBy);
 
-        Pageable pageable = PageRequest.of(page, size, sort);
-        Page<Product> products = productQueryService.getFilteredProducts(filterDTO, pageable);
-        return ResponseEntity.ok(products);
-    }
 
     // ✅ 3. Get product by ID
     @GetMapping("/{id}")
